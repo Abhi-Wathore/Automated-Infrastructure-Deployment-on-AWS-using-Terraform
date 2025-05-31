@@ -27,3 +27,4 @@ output "instance_state" {
   description = "The state of the instance"
   value       = aws_instance.web.instance_state
 }
+
