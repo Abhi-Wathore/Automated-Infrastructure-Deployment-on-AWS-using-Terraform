@@ -8,18 +8,6 @@ region = "eu-north-1"
 }
 }
 
-module "instances" {
-    source = "./EC2_Instance"
-    instance_name = var.instance_name
-    ami = var.ami
-    instance_type = var.instance_type
-    key_name = var.key_name
-    bucket_name = var.bucket_name
-    bucket_key = var.bucket_key
-    bucket_region = var.bucket_region
-    aws_region = var.aws_region
-}
-
 module "vpc" {
     source = "./VPC"
     vpc_name = var.vpc_name
@@ -32,6 +20,19 @@ module "vpc" {
     pub_subnet_name = var.pub_subnet_name
     pvt_subnet_name = var.pvt_subnet_name
 }
+
+module "instances" {
+    source = "./EC2_Instance"
+    instance_name = var.instance_name
+    ami = var.ami
+    instance_type = var.instance_type
+    key_name = var.key_name
+    bucket_name = var.bucket_name
+    bucket_key = var.bucket_key
+    bucket_region = var.bucket_region
+    aws_region = var.aws_region
+}
+
 module "load_balancer" {
     source = "./Load_Balancer"
     aws_lb_listener_name = var.aws_lb_listener_name
@@ -41,6 +42,7 @@ module "load_balancer" {
     aws_lb_security_groups = var.aws_lb_security_groups
     aws_lb_subnets = var.aws_lb_subnets
 }
+
 module "auto_scaling" {
     source = "./Auto_Scaling"
     auto_scaling_group_name = var.auto_scaling_group_name
