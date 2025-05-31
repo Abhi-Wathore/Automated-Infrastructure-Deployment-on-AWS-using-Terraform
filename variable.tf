@@ -134,14 +134,3 @@ variable "aws_lb_subnets" {
   default     = []
 }
 
-
-
-
-
-
-
-
-
-
-
-
