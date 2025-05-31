@@ -31,3 +31,18 @@ resource "aws_lb_target_group_attachment" "attachment" {
     port             = 80
     # This attaches the web instance to the target group
 }
+resource "aws_lb_target_group" "tg" {
+    name     = var.aws_lb_target_group_name
+    port     = 80
+    protocol = "HTTP"
+    vpc_id   = aws_vpc.mainvpc.id
+
+    health_check {
+        path                = "/"
+        interval            = 30
+        timeout             = 5
+        healthy_threshold   = 5
+        unhealthy_threshold = 2
+    }
+    # This target group is created for the load balancer with health checks configured
+}
