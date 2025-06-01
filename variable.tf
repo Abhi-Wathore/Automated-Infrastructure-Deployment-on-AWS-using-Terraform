@@ -72,6 +72,18 @@ variable "instance_type" {
     default     = "t3.micro"
 }
 
+variable "project_name" {
+    description = "Name of the project"
+    type        = string
+    default     = "my-project"
+}
+
+variable "environment" {
+    description = "Environment for the resources (e.g., dev, prod)"
+    type        = string
+    default     = "dev"
+}
+
 variable "key_name" {
     description = "Name of the key pair for SSH access"
     type        = string
@@ -132,5 +144,24 @@ variable "aws_lb_subnets" {
   description = "Subnets for the AWS Load Balancer"
   type        = list(string)
   default     = []
+}
+
+
+variable "min_size" {
+    description = "Minimum size of the Auto Scaling group"
+    type        = number
+    default     = 1
+}
+
+variable "max_size" {
+    description = "Maximum size of the Auto Scaling group"
+    type        = number
+    default     = 3
+}
+
+variable "desired_capacity" {
+    description = "Desired capacity of the Auto Scaling group"
+    type        = number
+    default     = 2
 }
 
