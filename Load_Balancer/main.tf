@@ -4,6 +4,8 @@ resource "aws_load_balancer" "name" {
     load_balancer_type = "application"
     security_groups    = [data.aws_security_group.mysg.id]
     subnets            = [aws_subnet.pub-subnet.id, aws_subnet.pvt-subnet.id]
+    vpc_id = var.vpc_id
+
     
     tags = {
         Name = var.lb_name
