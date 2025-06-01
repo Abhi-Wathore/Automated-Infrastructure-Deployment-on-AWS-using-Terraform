@@ -11,3 +11,5 @@ variable "aws_lb_security_groups" {}
 variable "aws_lb_subnets" {}
 
 variable "vpc_id" {}
+
+variable "lb_name" {}

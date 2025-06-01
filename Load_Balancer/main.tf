@@ -1,4 +1,5 @@
-resource "aws_load_balancer" "name" {
+
+resource "aws_lb" "name" {
     name               = var.lb_name
     internal           = false
     load_balancer_type = "application"
@@ -13,7 +14,7 @@ resource "aws_load_balancer" "name" {
     # The load balancer is created with the name defined in the variable lb_name
 }
 resource "aws_lb_listener" "http" {
-    load_balancer_arn = aws_load_balancer.name.arn
+    load_balancer_arn = aws_lb.name.arn
     port              = 80
     protocol          = "HTTP"
 
@@ -37,7 +38,7 @@ resource "aws_lb_target_group" "tg" {
     name     = var.aws_lb_target_group_name
     port     = 80
     protocol = "HTTP"
-    vpc_id   = aws_vpc.mainvpc.id
+    vpc_id   = var.vpc_id
 
     health_check {
         path                = "/"
