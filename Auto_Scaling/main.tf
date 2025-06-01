@@ -1,5 +1,3 @@
-# Auto Scaling configuration for EC2 instances in public subnet
-
 resource "aws_launch_template" "web_app_template" {
   name_prefix   = "webapp-launch-"
   image_id      = var.ami
@@ -8,25 +6,26 @@ resource "aws_launch_template" "web_app_template" {
 
   network_interfaces {
     associate_public_ip_address = true
-    subnet_id                   = aws_subnet.pub-subnet.id
-    security_groups             = [data.aws_security_group.mysg.id]
+    subnet_id                   = var.subnet_id
+    security_groups             = [var.security_group_id]
   }
 
   tag_specifications {
     resource_type = "instance"
     tags = {
-      Name = var.instance_name
+      Name        = var.instance_name
       Environment = var.environment
-      Project = var.project_name
+      Project     = var.project_name
     }
   }
 }
 
 resource "aws_autoscaling_group" "web_app_asg" {
-  desired_capacity     = 2
-  max_size             = 4
-  min_size             = 1
-  vpc_zone_identifier  = [aws_subnet.pub-subnet.id]
+  desired_capacity     = var.desired_capacity
+  max_size             = var.max_size
+  min_size             = var.min_size
+  vpc_zone_identifier  = [var.subnet_id]
+
   launch_template {
     id      = aws_launch_template.web_app_template.id
     version = "$Latest"
