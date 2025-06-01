@@ -36,3 +36,7 @@ output "security_group_id" {
 description = "ID of the default security group"
 value = data.aws_security_group.mysg.id
 }
+
+output "public_subnet_id" {
+  value = aws_subnet.public.id  # Or a list, like aws_subnet.public[*].id
+}
