@@ -27,6 +27,8 @@ module "instances" {
     ami = var.ami
     instance_type = var.instance_type
     key_name = var.key_name
+    project_name = var.project_name
+    environment = var.environment
     bucket_name = var.bucket_name
     bucket_key = var.bucket_key
     bucket_region = var.bucket_region
@@ -45,12 +47,15 @@ module "load_balancer" {
 
 module "auto_scaling" {
     source = "./Auto_Scaling"
-    auto_scaling_group_name = var.auto_scaling_group_name
-    launch_template_name = var.launch_template_name
+    ami = var.ami
+    instance_type = var.instance_type
+    key_name = var.key_name
+    subnet_id = module.vpc.public_subnet_id
+    security_group_id = module.vpc.security_group_id
+    instance_name = var.instance_name
+    environment = var.environment
+    project_name = var.project_name
+    desired_capacity = var.desired_capacity
     min_size = var.min_size
     max_size = var.max_size
-    desired_capacity = var.desired_capacity
-    vpc_zone_identifier = var.vpc_zone_identifier
-    target_group_arns = var.target_group_arns
-  
 }
