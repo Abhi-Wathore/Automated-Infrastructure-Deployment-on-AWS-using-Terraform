@@ -1,3 +1,9 @@
+variable "target_group_arns" {
+  description = "A list of target group ARNs for the Auto Scaling group"
+  type        = list(string)
+  default     = []
+}
+
 resource "aws_launch_template" "web_app_template" {
   name_prefix   = "webapp-launch-"
   image_id      = var.ami
@@ -31,6 +37,9 @@ resource "aws_autoscaling_group" "web_app_asg" {
     version = "$Latest"
   }
 
+  # ✅ Register with target groups if provided
+  target_group_arns = var.target_group_arns
+
   tag {
     key                 = "Name"
     value               = var.instance_name
@@ -40,7 +49,7 @@ resource "aws_autoscaling_group" "web_app_asg" {
   health_check_type         = "EC2"
   health_check_grace_period = 300
 
-  force_delete = true
+  force_delete              = true
   wait_for_capacity_timeout = "0"
   termination_policies      = ["OldestInstance"]
 }
