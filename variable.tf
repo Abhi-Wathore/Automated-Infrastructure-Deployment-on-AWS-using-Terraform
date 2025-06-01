@@ -114,42 +114,41 @@ variable "bucket_key" {
     default     = "my-object-key"
 }
  
-variable "aws_lb_listener_name" {
-  description = "Name of the AWS Load Balancer Listener"
-  type        = string
-  default     = "my-load-balancer-listener"
-  
-}
-variable "aws_lb_target_group_name" {
-  description = "Name of the AWS Load Balancer Target Group"
-  type        = string
-  default     = "my-load-balancer-target-group"
-}
 variable "aws_lb_name" {
-  description = "Name of the AWS Load Balancer"
   type        = string
-  default     = "my-load-balancer"
-}
-variable "aws_lb_internal" {
-  description = "Whether the AWS Load Balancer is internal"
-  type        = bool
-  default     = false
-}
-variable "aws_lb_security_groups" {
-  description = "Security groups for the AWS Load Balancer"
-  type        = list(string)
-  default     = []
-}
-variable "aws_lb_subnets" {
-  description = "Subnets for the AWS Load Balancer"
-  type        = list(string)
-  default     = []
+  description = "Name of the load balancer"
 }
 
-variable "lb_name" {
-  description = "The name of the load balancer"
+variable "vpc_id" {
   type        = string
+  description = "VPC ID for the load balancer"
 }
+
+variable "aws_lb_listener_name" {
+  type        = string
+  description = "Name of the load balancer listener"
+}
+
+variable "aws_lb_target_group_name" {
+  type        = string
+  description = "Name of the target group"
+}
+
+variable "aws_lb_internal" {
+  type        = bool
+  description = "Whether the LB is internal"
+}
+
+variable "aws_lb_security_groups" {
+  type        = list(string)
+  description = "List of security groups for the LB"
+}
+
+variable "aws_lb_subnets" {
+  type        = list(string)
+  description = "List of subnets for the LB"
+}
+
 
 
 variable "min_size" {
@@ -169,4 +168,8 @@ variable "desired_capacity" {
     type        = number
     default     = 2
 }
+
+
+
+
 
