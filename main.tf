@@ -36,15 +36,16 @@ module "instances" {
 }
 
 module "load_balancer" {
-    source = "./Load_Balancer"
-    vpc_id = module.vpc.vpc_id
-    aws_lb_listener_name = var.aws_lb_listener_name
-    aws_lb_target_group_name = var.aws_lb_target_group_name
-    aws_lb_name = var.aws_lb_name
-    aws_lb_internal = var.aws_lb_internal
-    aws_lb_security_groups = var.aws_lb_security_groups
-    aws_lb_subnets = var.aws_lb_subnets
+  source = "./Load_Balancer"
+  aws_lb_name = var.aws_lb_name
+  vpc_id = module.vpc.vpc_id
+  aws_lb_listener_name = var.aws_lb_listener_name
+  aws_lb_target_group_name  = var.aws_lb_target_group_name
+  aws_lb_internal = var.aws_lb_internal
+  aws_lb_security_groups = var.aws_lb_security_groups
+  aws_lb_subnets = var.aws_lb_subnets
 }
+
 
 module "auto_scaling" {
     source = "./Auto_Scaling"
