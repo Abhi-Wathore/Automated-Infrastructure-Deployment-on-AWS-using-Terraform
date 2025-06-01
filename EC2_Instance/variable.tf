@@ -17,3 +17,7 @@ variable "bucket_name" {}
 variable "bucket_region" {}
 
 variable "bucket_key" {}
+
+variable "project_name" {}
+
+variable "environment" {}
