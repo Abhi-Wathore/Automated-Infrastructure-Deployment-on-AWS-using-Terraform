@@ -146,6 +146,11 @@ variable "aws_lb_subnets" {
   default     = []
 }
 
+variable "lb_name" {
+  description = "The name of the load balancer"
+  type        = string
+}
+
 
 variable "min_size" {
     description = "Minimum size of the Auto Scaling group"
